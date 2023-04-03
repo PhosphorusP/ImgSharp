@@ -15,7 +15,7 @@ export default defineConfig({
     pluginGenerate({ source: "icon.svg", bundleSource: true }),
     VitePWA({
       injectRegister: "inline",
-      registerType: "autoUpdate",
+      registerType: "prompt",
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
       },
