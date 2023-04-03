@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" sizes="180x180">
+  <link rel="mask-icon" href="./assets/icon.svg" color="#FFFFFF">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)">
+  <title>ImgSharp#</title>
+  <style>
+    :root {
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    html,
+    body {
+      overflow: hidden;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      padding: 0;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    @media (prefers-color-scheme: light) {
+      body {
+        background-color: #FFFFFF;
+        color: #000;
+      }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #141414;
+        color: #FFF;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <div style="position: absolute; width: 100vw; top: 32px; text-align: center;">正在准备ImgSharp#...</div>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
