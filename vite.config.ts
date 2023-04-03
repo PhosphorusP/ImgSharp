@@ -16,9 +16,10 @@ export default defineConfig({
     VitePWA({
       injectRegister: "inline",
       registerType: "autoUpdate",
-      strategies: "injectManifest",
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+      },
       srcDir: "src",
-      filename: "sw.ts",
       manifest: manifest,
     }),
     ViteMinifyPlugin({}),

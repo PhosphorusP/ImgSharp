@@ -80,7 +80,7 @@ const DOMHandler: React.FC = () => {
     document.addEventListener("keydown", keyHandler);
     const appInstalledHandler = () =>
       modal.success({
-        title: " PWA安装成功",
+        title: " PWA 安装成功",
         content: "现在你可以直接使用 ImgSharp# 打开本地图片了。",
       });
     window.addEventListener("appinstalled", appInstalledHandler);
