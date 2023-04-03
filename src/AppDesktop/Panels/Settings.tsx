@@ -1,5 +1,14 @@
 import { SettingOutlined, SyncOutlined } from "@ant-design/icons";
-import { App, Button, Form, Popover, Radio, Space, Switch } from "antd";
+import {
+  App,
+  Button,
+  Form,
+  Popover,
+  Radio,
+  Space,
+  Switch,
+  Typography,
+} from "antd";
 import { CSSProperties, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { updateState } from "../../store/action";
@@ -91,7 +100,12 @@ const Settings: React.FC = () => {
           >
             <Switch checked={storedSettings.simplifiedPreview} />
           </Form.Item>
-          <Form.Item noStyle>
+          <Form.Item>
+            <Typography.Text type="secondary">
+              Build {__BUILD_TIMESTAMP__}
+            </Typography.Text>
+          </Form.Item>
+          <Form.Item style={{ display: "block" }}>
             <Space>
               <Button
                 type="primary"

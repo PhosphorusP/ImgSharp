@@ -2,6 +2,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { App, theme } from "antd";
 import { useEffect, useState } from "react";
 import { importFiles, selectImg } from "../../store/action";
+import { useSelector } from "react-redux";
 import store from "../../store/store";
 
 const { useToken } = theme;
@@ -10,7 +11,9 @@ const DOMHandler: React.FC = () => {
   const [mask, setMask] = useState(false);
   const { token } = useToken();
   const { message, modal } = App.useApp();
+  const offlineReady = useSelector((state: any) => state.reducer.offlineReady);
   useEffect(() => {
+    if (offlineReady) message.success("离线缓存已就绪");
     const defaultHandler: EventListener = (e: Event) => e.preventDefault();
     document.addEventListener("dragleave", defaultHandler);
     document.addEventListener("drop", defaultHandler);

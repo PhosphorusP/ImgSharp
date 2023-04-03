@@ -138,6 +138,9 @@ devDependencies:
   workbox-strategies:
     specifier: ^6.5.4
     version: 6.5.4
+  workbox-window:
+    specifier: ^6.5.4
+    version: 6.5.4
 
 packages:
 

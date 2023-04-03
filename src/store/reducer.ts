@@ -28,6 +28,7 @@ const initialState = {
     appMode: "desktop",
     simplifiedPreview: false,
   },
+  offlineReady: false,
 };
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
