@@ -11,8 +11,10 @@ import { updateState } from "./store/action";
 
 const AppProvider = () => {
   const updateSW = registerSW({
+    onNeedRefresh: () => updateState({ needUpdate: true }),
     onOfflineReady: () => updateState({ offlineReady: true }),
   });
+  (window as any).updateSW = updateSW;
   printBuildInfo();
   const appMode: any = useSelector(
     (state: any) => state.reducer.settings.appMode

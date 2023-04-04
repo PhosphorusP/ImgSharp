@@ -1,12 +1,14 @@
 import { SettingOutlined, SyncOutlined } from "@ant-design/icons";
 import {
   App,
+  Badge,
   Button,
   Form,
   Popover,
   Radio,
   Space,
   Switch,
+  Tag,
   Typography,
 } from "antd";
 import { CSSProperties, useEffect, useState } from "react";
@@ -15,6 +17,7 @@ import { updateState } from "../../store/action";
 
 const Settings: React.FC = () => {
   const { modal } = App.useApp();
+  const needUpdate = useSelector((state: any) => state.reducer.needUpdate);
   const storedSettings = useSelector((state: any) => state.reducer.settings);
   const [settings, setSettings] = useState({
     appMode: "desktop",
@@ -42,16 +45,21 @@ const Settings: React.FC = () => {
     updateSettings(all);
     updateState({ settings: all });
   };
+  const restoreSW = async () => {
+    let registrations = await navigator.serviceWorker.getRegistrations();
+    for (let sw in registrations) await registrations[sw].unregister();
+    let cacheNames = await caches.keys();
+    cacheNames.forEach(async (cacheName) => {
+      await caches.delete(cacheName);
+    });
+  };
   const reloadApp = () => {
     modal.confirm({
       zIndex: 5000,
       title: "重新加载应用程序",
       content: "将清除缓存并重新联网加载应用程序。请确认文件已保存。",
       onOk: async () => {
-        let cacheNames = await caches.keys();
-        cacheNames.forEach(async (cacheName) => {
-          await caches.delete(cacheName);
-        });
+        await restoreSW();
         location.reload();
       },
     });
@@ -63,10 +71,7 @@ const Settings: React.FC = () => {
       content: "将清除所有配置文件和应用程序缓存，并还原所有设置。",
       okButtonProps: { danger: true },
       onOk: async () => {
-        let cacheNames = await caches.keys();
-        cacheNames.forEach(async (cacheName) => {
-          await caches.delete(cacheName);
-        });
+        await restoreSW();
         localStorage.removeItem("imgsharp_presetlist");
         localStorage.removeItem("imgsharp_settings");
         location.reload();
@@ -104,16 +109,24 @@ const Settings: React.FC = () => {
             <Typography.Text type="secondary">
               Build {__BUILD_TIMESTAMP__}
             </Typography.Text>
+            {needUpdate ? (
+              <Tag color="blue" bordered={false}>
+                {" "}
+                新版本
+              </Tag>
+            ) : undefined}
           </Form.Item>
           <Form.Item style={{ display: "block" }}>
             <Space>
-              <Button
-                type="primary"
-                icon={<SyncOutlined />}
-                onClick={reloadApp}
-              >
-                重新加载应用程序
-              </Button>
+              <Badge dot={needUpdate}>
+                <Button
+                  type="primary"
+                  icon={<SyncOutlined />}
+                  onClick={reloadApp}
+                >
+                  重新加载应用程序
+                </Button>
+              </Badge>
               <Button type="primary" danger onClick={restore}>
                 重置
               </Button>
@@ -121,7 +134,11 @@ const Settings: React.FC = () => {
           </Form.Item>
         </Form>
       }
-      children={<Button size="large" type="text" icon={<SettingOutlined />} />}
+      children={
+        <Badge dot={needUpdate} offset={[-10, 10]}>
+          <Button size="large" type="text" icon={<SettingOutlined />} />
+        </Badge>
+      }
     />
   );
 };

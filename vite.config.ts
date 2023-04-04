@@ -15,11 +15,13 @@ export default defineConfig({
     pluginGenerate({ source: "icon.svg", bundleSource: true }),
     VitePWA({
       injectRegister: "inline",
-      registerType: "prompt",
-      workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+      strategies: "injectManifest",
+      injectManifest: {
+        globPatterns: ["**/*"],
       },
+      registerType: "prompt",
       srcDir: "src",
+      filename: "sw.ts",
       manifest: manifest,
     }),
     ViteMinifyPlugin({}),

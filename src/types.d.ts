@@ -59,20 +59,6 @@ interface PresetListItem {
 
 declare module "nodupes";
 
-declare module "virtual:pwa-register/vue" {
-  import { Ref } from "vue";
-  type RegisterSWOptions = {
-    immediate?: boolean;
-    onNeedRefresh?: () => void;
-    onOfflineReady?: () => void;
-  };
-
-  function useRegisterSW(options?: RegisterSWOptions): {
-    needRefresh: Ref<boolean>;
-    offlineReady: Ref<boolean>;
-    updateServiceWorker(reloadPage?: boolean): void;
-  };
-}
 declare module "virtual:pwa-register" {
   type RegisterSWOptions = {
     immediate?: boolean;
