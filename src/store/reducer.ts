@@ -29,7 +29,6 @@ const initialState = {
     simplifiedPreview: false,
   },
   needUpdate: false,
-  offlineReady: false,
 };
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {

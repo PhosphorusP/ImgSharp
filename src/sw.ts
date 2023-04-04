@@ -6,6 +6,10 @@ declare let self: ServiceWorkerGlobalScope;
 
 precacheAndRoute(self.__WB_MANIFEST);
 
+(self as any).addEventListener("message", (event: MessageEvent) => {
+  if (event.data && event.data.type === "SKIP_WAITING")
+    (self as any).skipWaiting();
+});
 (self as any).addEventListener("fetch", (e: any) => {
   const url = new URL(e.request.url);
   // If this is an incoming POST request for the
