@@ -107,7 +107,7 @@ const Settings: React.FC = () => {
             <Typography.Text type="secondary">
               Build {__BUILD_TIMESTAMP__}
             </Typography.Text>
-            {true || needUpdate ? (
+            {needUpdate ? (
               <Tag color="blue" bordered={false} style={{ marginLeft: "4px" }}>
                 {" "}
                 新版本
