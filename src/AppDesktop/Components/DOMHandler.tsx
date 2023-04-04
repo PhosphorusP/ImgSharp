@@ -13,7 +13,8 @@ const DOMHandler: React.FC = () => {
   const { message, modal } = App.useApp();
   const offlineReady = useSelector((state: any) => state.reducer.offlineReady);
   useEffect(() => {
-    if (offlineReady) message.success("离线缓存已就绪");
+    if (offlineReady)
+      message.success({ content: "离线缓存已就绪", duration: 5 });
     const defaultHandler: EventListener = (e: Event) => e.preventDefault();
     document.addEventListener("dragleave", defaultHandler);
     document.addEventListener("drop", defaultHandler);

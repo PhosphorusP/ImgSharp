@@ -47,11 +47,9 @@ const Settings: React.FC = () => {
   };
   const restoreSW = async () => {
     let registrations = await navigator.serviceWorker.getRegistrations();
-    for (let sw in registrations) await registrations[sw].unregister();
+    for (let sw of registrations) await sw.unregister();
     let cacheNames = await caches.keys();
-    cacheNames.forEach(async (cacheName) => {
-      await caches.delete(cacheName);
-    });
+    for (let cachename of cacheNames) await caches.delete(cachename);
   };
   const reloadApp = () => {
     modal.confirm({
@@ -109,8 +107,8 @@ const Settings: React.FC = () => {
             <Typography.Text type="secondary">
               Build {__BUILD_TIMESTAMP__}
             </Typography.Text>
-            {needUpdate ? (
-              <Tag color="blue" bordered={false}>
+            {true || needUpdate ? (
+              <Tag color="blue" bordered={false} style={{ marginLeft: "4px" }}>
                 {" "}
                 新版本
               </Tag>
